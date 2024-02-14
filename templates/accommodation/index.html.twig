@@ -1,0 +1,15 @@
+<table border="3">
+    <tr>
+        <td>title</td>
+        <td>address</td>
+        <td>price</td>
+    </tr>
+    {% for a in Accommodations %}
+    <tr>
+        <td>{{a.Title}}</td>
+        <td>{{a.Adress}}</td>
+        <td>{{a.Price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href ="{{path('Accommodation_add')}}">Add</a>
