@@ -20,6 +20,9 @@ class Vol
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateArrivee = null;
 
+    #[ORM\ManyToOne(inversedBy: 'vols')]
+    private ?Client $client = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Vol
     public function setDateArrivee(?\DateTimeInterface $dateArrivee): static
     {
         $this->dateArrivee = $dateArrivee;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }

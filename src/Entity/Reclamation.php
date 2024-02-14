@@ -23,6 +23,12 @@ class Reclamation
     #[ORM\Column(length: 255)]
     private ?string $actionsCorrectives = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reclamations')]
+    private ?Client $client = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reclamations')]
+    private ?Accommodation $accommodation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +66,30 @@ class Reclamation
     public function setActionsCorrectives(string $actionsCorrectives): static
     {
         $this->actionsCorrectives = $actionsCorrectives;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getAccommodation(): ?Accommodation
+    {
+        return $this->accommodation;
+    }
+
+    public function setAccommodation(?Accommodation $accommodation): static
+    {
+        $this->accommodation = $accommodation;
 
         return $this;
     }

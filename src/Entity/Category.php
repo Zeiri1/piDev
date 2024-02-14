@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -21,6 +23,14 @@ class Category
 
     #[ORM\Column]
     private ?float $Statistics = null;
+
+    #[ORM\OneToMany(targetEntity: Accommodation::class, mappedBy: 'category')]
+    private Collection $accommodations;
+
+    public function __construct()
+    {
+        $this->accommodations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +69,36 @@ class Category
     public function setStatistics(float $Statistics): static
     {
         $this->Statistics = $Statistics;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Accommodation>
+     */
+    public function getAccommodations(): Collection
+    {
+        return $this->accommodations;
+    }
+
+    public function addAccommodation(Accommodation $accommodation): static
+    {
+        if (!$this->accommodations->contains($accommodation)) {
+            $this->accommodations->add($accommodation);
+            $accommodation->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccommodation(Accommodation $accommodation): static
+    {
+        if ($this->accommodations->removeElement($accommodation)) {
+            // set the owning side to null (unless already changed)
+            if ($accommodation->getCategory() === $this) {
+                $accommodation->setCategory(null);
+            }
+        }
 
         return $this;
     }

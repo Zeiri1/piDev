@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -30,6 +32,18 @@ class User
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $username = null;
+
+    #[ORM\OneToMany(targetEntity: Client::class, mappedBy: 'user')]
+    private Collection $clients;
+
+    #[ORM\OneToMany(targetEntity: Accommodation::class, mappedBy: 'user')]
+    private Collection $accommodations;
+
+    public function __construct()
+    {
+        $this->clients = new ArrayCollection();
+        $this->accommodations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +118,66 @@ class User
     public function setUsername(?string $username): static
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Client>
+     */
+    public function getClients(): Collection
+    {
+        return $this->clients;
+    }
+
+    public function addClient(Client $client): static
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients->add($client);
+            $client->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): static
+    {
+        if ($this->clients->removeElement($client)) {
+            // set the owning side to null (unless already changed)
+            if ($client->getUser() === $this) {
+                $client->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Accommodation>
+     */
+    public function getAccommodations(): Collection
+    {
+        return $this->accommodations;
+    }
+
+    public function addAccommodation(Accommodation $accommodation): static
+    {
+        if (!$this->accommodations->contains($accommodation)) {
+            $this->accommodations->add($accommodation);
+            $accommodation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccommodation(Accommodation $accommodation): static
+    {
+        if ($this->accommodations->removeElement($accommodation)) {
+            // set the owning side to null (unless already changed)
+            if ($accommodation->getUser() === $this) {
+                $accommodation->setUser(null);
+            }
+        }
 
         return $this;
     }
