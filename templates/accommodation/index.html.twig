@@ -3,12 +3,18 @@
         <td>title</td>
         <td>address</td>
         <td>price</td>
+        <td>edit</td>
+        <td>delete</td>
+
     </tr>
     {% for a in Accommodations %}
     <tr>
         <td>{{a.Title}}</td>
         <td>{{a.Adress}}</td>
         <td>{{a.Price }}</td>
+        <td><a href="{{ path('editAccommodation', {'id': a.id}) }}">edit</a></td>
+        <td><a href="{{ path('deleteAccommodation', {'id': a.id}) }}">delete</a></td>
+
     </tr>
     {% endfor %}
 </table>

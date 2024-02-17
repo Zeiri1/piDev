@@ -1,0 +1,19 @@
+<table border="3">
+    <tr>
+        <td>CategoryName</td>
+        <td>Description</td>
+        <td>Statistics</td>
+        <td>edit</td>
+        <td>delete</td>
+    </tr>
+    {% for a in Categories %}
+    <tr>
+        <td>{{a.CategoryName}}</td>
+        <td>{{a.Description}}</td>
+        <td>{{a.Statistics}}</td>
+        <td><a href="{{ path('editCategory', {'id': a.id}) }}">edit</a></td>
+        <td><a href="{{ path('deleteCategory', {'id': a.id}) }}">delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<a href ="{{path('Category_add')}}">Add</a>
