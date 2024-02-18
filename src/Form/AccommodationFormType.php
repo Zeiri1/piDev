@@ -17,7 +17,6 @@ class AccommodationFormType extends AbstractType
             ->add('Adress')
             ->add('Price')
             ->add('Type')
-            ->add('category')
             ->add('add', SubmitType::class)
         ;
     }
