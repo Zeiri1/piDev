@@ -22,7 +22,7 @@ class CategoryController extends AbstractController
     );
     }
 
-    #[Route('/Category/form', name: 'Category_add')]
+    #[Route('/category/form', name: 'Category_add')]
     public function AddCategory(ManagerRegistry $doctrine, Request $request): Response
     {
         $Category =new Category();

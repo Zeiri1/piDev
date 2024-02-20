@@ -25,10 +25,39 @@ class AccommodationController extends AbstractController
     #[Route('/accommodation/add', name: 'Accommodation_add')]
     public function AddAccommodation(ManagerRegistry $doctrine, Request $request): Response
     {
+        $errorMessage = "";
         $Accommodation =new Accommodation();
         $form=$this->createForm(AccommodationFormType::class,$Accommodation);
         $form->handleRequest($request);
         if($form->isSubmitted()){
+            if(empty($form->get('Title')->getData())){
+                $errorMessage = "Title is empty";
+                return $this->render('accommodation/form.html.twig',[
+                    'formAccom'=>$form->createView(),
+                    'errorMessage'=>$errorMessage
+                ]);
+            }
+            if(empty($form->get('Adress')->getData())){
+                $errorMessage = "Address is empty";
+                return $this->render('accommodation/form.html.twig',[
+                    'formAccom'=>$form->createView(),
+                    'errorMessage'=>$errorMessage
+                ]);
+            }
+            if(!(is_float($form->get('Price')->getData()) && (floatval($form->get('Price')->getData())>0))){
+                $errorMessage = "Please put a valid price";
+                return $this->render('accommodation/form.html.twig',[
+                    'formAccom'=>$form->createView(),
+                    'errorMessage'=>$errorMessage
+                ]);
+            }
+            if(empty($form->get('Type')->getData())){
+                $errorMessage = "Type is empty";
+                return $this->render('accommodation/form.html.twig',[
+                    'formAccom'=>$form->createView(),
+                    'errorMessage'=>$errorMessage
+                ]);
+            }
             $em= $doctrine->getManager();
             $em->persist($Accommodation);
             $em->flush();
@@ -36,6 +65,7 @@ class AccommodationController extends AbstractController
         }
         return $this->render('accommodation/form.html.twig',[
             'formAccom'=>$form->createView(),
+            'errorMessage'=>$errorMessage
         ]);
     }
      #[Route('/accommodation/delete/{id}', name: 'deleteAccommodation')]
