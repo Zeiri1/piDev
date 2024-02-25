@@ -72,7 +72,26 @@
         <!-- Navbar End -->
 
 <div style="margin-top:100px">
-    {{form(formAccom)}}
+{{form_start(formAccom,{'attr':{'novalidate': 'novalidate'}} )}}
+    {{form_label(formAccom.Title,"Title")}}
+    {{form_widget(formAccom.Title)}}
+    {{form_errors(formAccom.Title)}}
+    <br/>
+    {{form_label(formAccom.Adress,"Address")}}
+    {{form_widget(formAccom.Adress)}}
+    {{form_errors(formAccom.Adress)}}
+    <br/>
+    {{form_label(formAccom.Price,"Price")}}
+    {{form_widget(formAccom.Price)}}
+    {{form_errors(formAccom.Price)}}
+    <br/>
+    {{form_label(formAccom.Type,"Type")}}
+    {{form_widget(formAccom.Type)}}
+    {{form_errors(formAccom.Type)}}
+    <br/>
+
+    {{form_widget(formAccom.add)}}
+{{form_end(formAccom)}}
     <div style="color: red;">{{errorMessage}}</div>
 </div>
         <!-- Subscribe Start -->

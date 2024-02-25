@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Accommodation;
 use App\Form\AccommodationFormType;
 use App\Repository\AccommodationRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccommodationController extends AbstractController
 {
     #[Route('/accommodation', name: 'app_accommodation')]
-    public function showAccommodations(AccommodationRepository $AccomRepo): Response
+    public function showAccommodations(AccommodationRepository $AccomRepo)
     {
 
         $allAccoms = $AccomRepo->findAll();
@@ -23,8 +24,10 @@ class AccommodationController extends AbstractController
     );
     }
     #[Route('/accommodation/add', name: 'Accommodation_add')]
-    public function AddAccommodation(ManagerRegistry $doctrine, Request $request): Response
+    public function AddAccommodation(ManagerRegistry $doctrine, 
+    Request $request, CategoryRepository $categoryRepository): Response
     {
+        $allCategories = $categoryRepository->findAll();
         $errorMessage = "";
         $Accommodation =new Accommodation();
         $form=$this->createForm(AccommodationFormType::class,$Accommodation);
@@ -34,30 +37,36 @@ class AccommodationController extends AbstractController
                 $errorMessage = "Title is empty";
                 return $this->render('accommodation/form.html.twig',[
                     'formAccom'=>$form->createView(),
-                    'errorMessage'=>$errorMessage
+                    'errorMessage'=>$errorMessage,
+                    'allCategories'=>$allCategories
                 ]);
             }
             if(empty($form->get('Adress')->getData())){
                 $errorMessage = "Address is empty";
                 return $this->render('accommodation/form.html.twig',[
                     'formAccom'=>$form->createView(),
-                    'errorMessage'=>$errorMessage
+                    'errorMessage'=>$errorMessage,
+                    'allCategories'=>$allCategories
                 ]);
             }
             if(!(is_float($form->get('Price')->getData()) && (floatval($form->get('Price')->getData())>0))){
                 $errorMessage = "Please put a valid price";
                 return $this->render('accommodation/form.html.twig',[
                     'formAccom'=>$form->createView(),
-                    'errorMessage'=>$errorMessage
+                    'errorMessage'=>$errorMessage,
+                    'allCategories'=>$allCategories
                 ]);
             }
             if(empty($form->get('Type')->getData())){
                 $errorMessage = "Type is empty";
                 return $this->render('accommodation/form.html.twig',[
                     'formAccom'=>$form->createView(),
-                    'errorMessage'=>$errorMessage
+                    'errorMessage'=>$errorMessage,
+                    'allCategories'=>$allCategories
                 ]);
             }
+            // $category = $categoryRepository->find($form->get('Category')->getData());
+            // $Accommodation->setCategory($category);
             $em= $doctrine->getManager();
             $em->persist($Accommodation);
             $em->flush();
@@ -65,7 +74,8 @@ class AccommodationController extends AbstractController
         }
         return $this->render('accommodation/form.html.twig',[
             'formAccom'=>$form->createView(),
-            'errorMessage'=>$errorMessage
+            'errorMessage'=>$errorMessage,
+            'allCategories'=>$allCategories
         ]);
     }
      #[Route('/accommodation/delete/{id}', name: 'deleteAccommodation')]

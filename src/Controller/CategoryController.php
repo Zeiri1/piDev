@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'showCategory')]
+    #[Route('/admin/category', name: 'showCategory')]
     public function showCategory(CategoryRepository $CategoryRepo): Response
     {
         $allcategories = $CategoryRepo->findAll();
@@ -22,7 +22,7 @@ class CategoryController extends AbstractController
     );
     }
 
-    #[Route('/category/form', name: 'Category_add')]
+    #[Route('/admin/category/form', name: 'Category_add')]
     public function AddCategory(ManagerRegistry $doctrine, Request $request): Response
     {
         $Category =new Category();
@@ -38,7 +38,7 @@ class CategoryController extends AbstractController
             'formCategory'=>$form->createView(),
         ]);
     }
-    #[Route('/deleteCategory/{id}', name: 'deleteCategory')]
+    #[Route('/admin/deleteCategory/{id}', name: 'deleteCategory')]
     public function deleteCategory($id, ManagerRegistry $manager, CategoryRepository $repo): Response
     {
         $emm = $manager->getManager();
@@ -49,7 +49,7 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('showCategory');
     }
-    #[Route('/editCategory/{id}', name: 'editCategory')]
+    #[Route('/admin/editCategory/{id}', name: 'editCategory')]
     public function editCategory( $id,ManagerRegistry $manager, CategoryRepository $CategoryRepo, Request $request): Response
     {
        $em=$manager->getManager();

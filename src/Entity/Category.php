@@ -22,7 +22,7 @@ class Category
     private ?string $Description = null;
 
     #[ORM\Column]
-    private ?float $Statistics = null;
+    private ?float $Statistics = 0;
 
     #[ORM\OneToMany(targetEntity: Accommodation::class, mappedBy: 'category')]
     private Collection $accommodations;

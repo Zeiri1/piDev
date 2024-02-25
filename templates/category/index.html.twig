@@ -1,77 +1,243 @@
-{% extends 'base.html.twig' %}
+
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Hello BackController!{% endblock %}
 
 {% block body %}
-
-        <!-- Topbar Start -->
-        <div class="container-fluid bg-primary px-5 d-none d-lg-block">
-            <div class="row gx-0">
-                <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-                    <div class="d-inline-flex align-items-center" style="height: 45px;">
-                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-twitter fw-normal"></i></a>
-                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
-                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
-                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
-                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 text-center text-lg-end">
-                    <div class="d-inline-flex align-items-center" style="height: 45px;">
-                        <a href="#"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Register</small></a>
-                        <a href="#"><small class="me-3 text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
-                        <div class="dropdown">
-                            <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-home me-2"></i> My Dashboard</small></a>
-                            <div class="dropdown-menu rounded">
-                                <a href="#" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> Inbox</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i> Notifications</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="container-scroller">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
+          <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+        </div>
+        <ul class="nav">
+          <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+              <div class="nav-profile-image">
+                <img src="assets/images/faces/face1.jpg" alt="profile" />
+                <span class="login-status online"></span>
+                <!--change to offline or busy as needed-->
+              </div>
+              <div class="nav-profile-text d-flex flex-column pr-3">
+                <span class="font-weight-medium mb-2">Henry Klein</span>
+                <span class="font-weight-normal">$8,753.00</span>
+              </div>
+              <span class="badge badge-danger text-white ml-3 rounded">3</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="mdi mdi-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+         <!-- <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              <span class="menu-title">Basic UI Elements</span>
+              <i class="menu-arrow"></i>
+            </a>-->
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                </li>
+              </ul>
             </div>
-        </div>
-        <!-- Topbar End -->
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/icons/mdi.html">
+              <i class="mdi mdi-contacts menu-icon"></i>
+              <span class="menu-title">Users</span>
+            </a>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{path('adminShowAccommodation')}}">
+              <i class="mdi mdi-table-large menu-icon"></i>
+              <span class="menu-title">Accommodations</span>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="{{path('showCategory')}}">
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              <span class="menu-title">Categories</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/charts/chartjs.html">
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <span class="menu-title">Charts</span>
+            </a>
+          </li>
 
-        <!-- Navbar Start -->
-        <div class="container-fluid position-relative p-0">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0" style="background-color: #445c85;">
-                <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Discover Tn</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">Guides</a>
-                        <a href="services.html" class="nav-item nav-link">Services</a>
-                        <a href="packages.html" class="nav-item nav-link">Events</a>
-                        <a href="{{path('app_accommodation')}}" class="nav-item nav-link active">Accommodations</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="destination.html" class="dropdown-item">Destination</a>
-                                <a href="tour.html" class="dropdown-item">Explore Tour</a>
-                                <a href="booking.html" class="dropdown-item">Travel Booking</a>
-                                <a href="gallery.html" class="dropdown-item">Our Gallery</a>
-                                <a href="guides.html" class="dropdown-item">transport</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
+          <li class="nav-item">
+            <span class="nav-link" href="#">
+              <span class="menu-title">Docs</span>
+            </span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.bootstrapdash.com/demo/breeze-free/documentation/documentation.html">
+              <i class="mdi mdi-file-document-box menu-icon"></i>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li>
+          <li class="nav-item sidebar-actions">
+            <div class="nav-link">
+              <div class="mt-4">
+                <div class="border-none">
+                  <p class="text-black">Notification</p>
                 </div>
-            </nav>
+                <ul class="mt-4 pl-0">
+                  <li>Sign Out</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="container-fluid page-body-wrapper">
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close mdi mdi-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-default-theme">
+            <div class="img-ss rounded-circle bg-light border mr-3"></div> Default
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border mr-3"></div> Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles light"></div>
+            <div class="tiles dark"></div>
+          </div>
         </div>
-        <!-- Navbar End -->
+        <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+          <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+            <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+            <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
+              <i class="mdi mdi-menu"></i>
+            </button>
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-bell-outline"></i>
+                  <span class="count count-varient1">7</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="notificationDropdown">
+                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="assets/images/faces/face4.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> Dany Miles <span class="text-small text-muted">commented on your photo</span>
+                      </p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="assets/images/faces/face3.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> James <span class="text-small text-muted">posted a photo on your wall</span>
+                      </p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <img src="assets/images/faces/face2.jpg" alt="" class="profile-pic" />
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="mb-0"> Alex <span class="text-small text-muted">just mentioned you in his post</span>
+                      </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0">View all activities</p>
+                </div>
+              </li>
+              <li class="nav-item dropdown d-none d-sm-flex">
+                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-email-outline"></i>
+                  <span class="count count-varient2">5</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="messageDropdown">
+                  <h6 class="p-3 mb-0">Messages</h6>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-success">Request</span>
+                      <p class="text-small text-muted ellipsis mb-0"> Suport needed for user123 </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-warning">Invoices</span>
+                      <p class="text-small text-muted ellipsis mb-0"> Invoice for order is mailed </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-item-content flex-grow">
+                      <span class="badge badge-pill badge-danger">Projects</span>
+                      <p class="text-small text-muted ellipsis mb-0"> New project will start tomorrow </p>
+                    </div>
+                    <p class="text-small text-muted align-self-start"> 4:10 PM </p>
+                  </a>
+                  <h6 class="p-3 mb-0">See all activity</h6>
+                </div>
+              </li>
+              <li class="nav-item nav-search border-0 ml-1 ml-md-3 ml-lg-5 d-none d-md-flex">
+                <form class="nav-link form-inline mt-2 mt-md-0">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" />
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-magnify"></i>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right ml-lg-auto">
+              <li class="nav-item dropdown d-none d-xl-flex border-0">
+                <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-earth"></i> English </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
+                  <a class="dropdown-item" href="#"> French </a>
+                  <a class="dropdown-item" href="#"> Spain </a>
+                  <a class="dropdown-item" href="#"> Latin </a>
+                  <a class="dropdown-item" href="#"> Japanese </a>
+                </div>
+              </li>
+              <li class="nav-item nav-profile dropdown border-0">
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <img class="nav-profile-img mr-2" alt="" src="assets/images/faces/face1.jpg" />
+                  <span class="profile-name">Henry Klein</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="#">
+                    <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        <div class="main-panel">
 
-<div style="margin-top:100px">
+ <div>
     <table border="3">
         <tr>
             <td>CategoryName</td>
@@ -91,134 +257,18 @@
         {% endfor %}
     </table>
     <a href ="{{path('Category_add')}}">Add</a>
-</div>
+</div> 
 
-        <!-- Subscribe Start -->
-        <div class="container-fluid subscribe py-5">
-            <div class="container text-center py-5">
-                <div class="mx-auto text-center" style="max-width: 900px;">
-                    <h5 class="subscribe-title px-3">Subscribe</h5>
-                    <h1 class="text-white mb-4">Our Newsletter</h1>
-                    <p class="text-white mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore nam, architecto doloremque velit explicabo? Voluptate sunt eveniet fuga eligendi! Expedita laudantium fugiat corrupti eum cum repellat a laborum quasi.
-                    </p>
-                    <div class="position-relative mx-auto">
-                        <input class="form-control border-primary rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 px-4 mt-2 me-2">Subscribe</button>
-                    </div>
-                </div>
+          </div>
+          <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</a> from Bootstrapdash.com</span>
             </div>
+          </footer>
         </div>
-        <!-- Subscribe End -->
-
-        <!-- Footer Start -->
-        <div class="container-fluid footer py-5">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="mb-4 text-white">Get In Touch</h4>
-                            <a href=""><i class="fas fa-home me-2"></i> 123 Street, New York, USA</a>
-                            <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
-                            <a href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a>
-                            <a href="" class="mb-3"><i class="fas fa-print me-2"></i> +012 345 67890</a>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-share fa-2x text-white me-2"></i>
-                                <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="mb-4 text-white">Company</h4>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> About</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Careers</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Blog</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Press</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Gift Cards</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Magazine</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="mb-4 text-white">Support</h4>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Contact</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Legal Notice</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Terms and Conditions</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Sitemap</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Cookie policy</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item">
-                            <div class="row gy-3 gx-2 mb-4">
-                                <div class="col-xl-6">
-                                    <form>
-                                        <div class="form-floating">
-                                            <select class="form-select bg-dark border" id="select1">
-                                                <option value="1">Arabic</option>
-                                                <option value="2">German</option>
-                                                <option value="3">Greek</option>
-                                                <option value="3">New York</option>
-                                            </select>
-                                            <label for="select1">English</label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-xl-6">
-                                    <form>
-                                        <div class="form-floating">
-                                            <select class="form-select bg-dark border" id="select1">
-                                                <option value="1">USD</option>
-                                                <option value="2">EUR</option>
-                                                <option value="3">INR</option>
-                                                <option value="3">GBP</option>
-                                            </select>
-                                            <label for="select1">$</label>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <h4 class="text-white mb-3">Payments</h4>
-                            <div class="footer-bank-card">
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-amex fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-visa fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fas fa-credit-card fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-mastercard fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-paypal fa-2x"></i></a>
-                                <a href="#" class="text-white"><i class="fab fa-cc-discover fa-2x"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
-        
-        <!-- Copyright Start -->
-        <div class="container-fluid copyright text-body py-4">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-md-6 text-center text-md-end mb-md-0">
-                        <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Your Site Name</a>, All right reserved.
-                    </div>
-                    <div class="col-md-6 text-center text-md-start">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Copyright End -->
-         <!-- Back to Top -->
-        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
-
-        
-
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
 {% endblock %}

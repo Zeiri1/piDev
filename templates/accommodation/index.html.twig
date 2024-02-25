@@ -77,6 +77,7 @@
     <div style="border: black solid 1px;border-radius: 13px;padding: 14px; margin:10px; width:200px">
         <div>{{a.Title}}</div>
         <div>{{a.Adress}}</div>
+        <div>{{a.Category }}</div>
         <div>{{a.Price }}</div>
         <div><a href="{{ path('editAccommodation', {'id': a.id}) }}">edit</a></div>
         <div><a href="{{ path('deleteAccommodation', {'id': a.id}) }}">delete</a></div>
