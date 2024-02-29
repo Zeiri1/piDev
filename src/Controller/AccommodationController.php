@@ -6,6 +6,7 @@ use App\Entity\Accommodation;
 use App\Form\AccommodationFormType;
 use App\Repository\AccommodationRepository;
 use App\Repository\CategoryRepository;
+use App\Services\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +26,8 @@ class AccommodationController extends AbstractController
     }
     #[Route('/accommodation/add', name: 'Accommodation_add')]
     public function AddAccommodation(ManagerRegistry $doctrine, 
-    Request $request, CategoryRepository $categoryRepository): Response
+    Request $request, CategoryRepository $categoryRepository,
+    FileUploader $fileUploader): Response
     {
         $allCategories = $categoryRepository->findAll();
         $errorMessage = "";
@@ -65,8 +67,11 @@ class AccommodationController extends AbstractController
                     'allCategories'=>$allCategories
                 ]);
             }
-            // $category = $categoryRepository->find($form->get('Category')->getData());
-            // $Accommodation->setCategory($category);
+            $ImageLink = $form->get('Image')->getData();
+            if ($ImageLink) {
+                $imageRef = $fileUploader->upload($ImageLink);
+                $Accommodation->setImage($imageRef);
+            }
             $em= $doctrine->getManager();
             $em->persist($Accommodation);
             $em->flush();
@@ -95,7 +100,7 @@ class AccommodationController extends AbstractController
     {
         $em=$manager->getManager();
         $dataid=$AccomRepo->find($id);
-       // var_dump($dataid).die() ;
+        $errorMessage = "";
         $form=$this->createForm(AccommodationFormType::class,$dataid) ;
         $form->handleRequest($request) ; 
  
@@ -109,6 +114,7 @@ class AccommodationController extends AbstractController
  
         return $this->renderForm('accommodation/form.html.twig', [
             'formAccom' => $form,
+            'errorMessage'=>$errorMessage,
         ]);
     }
 

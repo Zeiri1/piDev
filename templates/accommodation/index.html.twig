@@ -74,10 +74,14 @@
 <div style="margin-top:100px">
  <div style="display:flex">
     {% for a in Accommodations %}
-    <div style="border: black solid 1px;border-radius: 13px;padding: 14px; margin:10px; width:200px">
+    <div style="border: black solid 1px;
+        border-radius: 13px;padding: 14px; 
+        margin:10px; width:200px; 
+        background: url('{% if a.Image is not null %} {{asset('images/'~a.Image)}} {% else %} {{asset('images/no-image.png')}} {% endif %}');
+        background-size: cover;">
         <div>{{a.Title}}</div>
         <div>{{a.Adress}}</div>
-        <div>{{a.Category }}</div>
+        <div>{{a.Category.CategoryName}}</div>
         <div>{{a.Price }}</div>
         <div><a href="{{ path('editAccommodation', {'id': a.id}) }}">edit</a></div>
         <div><a href="{{ path('deleteAccommodation', {'id': a.id}) }}">delete</a></div>
