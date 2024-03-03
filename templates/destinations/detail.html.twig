@@ -50,8 +50,8 @@
                         <a href="about.html" class="nav-item nav-link">Guides</a>
                         <a href="services.html" class="nav-item nav-link">Services</a>
                         <a href="packages.html" class="nav-item nav-link">Events</a>
-                        <a href="{{path('app_accommodation')}}" class="nav-item nav-link active">Accommodations</a>
-                        <a href="{{path('app_destinations')}}" class="nav-item nav-link">Destinations</a>
+                        <a href="{{path('app_accommodation')}}" class="nav-item nav-link">Accommodations</a>
+                        <a href="{{path('app_destinations')}}" class="nav-item nav-link active">Destinations</a>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
@@ -61,36 +61,19 @@
         <!-- Navbar End -->
 
 <div style="margin-top:100px">
-{{form_start(formAccom,{'attr':{'novalidate': 'novalidate'}} )}}
-    {{form_label(formAccom.Title,"Title")}}
-    {{form_widget(formAccom.Title)}}
-    {{form_errors(formAccom.Title)}}
-    <br/>
-    {{form_label(formAccom.Adress,"Address")}}
-    {{form_widget(formAccom.Adress)}}
-    {{form_errors(formAccom.Adress)}}
-    <br/>
-    {{form_label(formAccom.Price,"Price")}}
-    {{form_widget(formAccom.Price)}}
-    {{form_errors(formAccom.Price)}}
-    <br/>
-    {{form_label(formAccom.Type,"Type")}}
-    {{form_widget(formAccom.Type)}}
-    {{form_errors(formAccom.Type)}}
-    <br/>
-    {{form_label(formAccom.Category,"Category")}}
-    {{form_widget(formAccom.Category)}}
-    {{form_errors(formAccom.Category)}}
-    <br/>
-    {{form_label(formAccom.Image,"Image")}}
-    {{form_widget(formAccom.Image)}}
-    {{form_errors(formAccom.Image)}}
-    <br/>
+    <div style="border: black solid 1px;
+        border-radius: 13px;padding: 14px; 
+        margin:10px; width:200px; 
+        background: url('{% if accommodation.Image is not null %} {{asset('images/'~accommodation.Image)}} {% else %} {{asset('images/no-image.png')}} {% endif %}');
+        background-size: cover;">
 
-    {{form_widget(formAccom.add)}}
-{{form_end(formAccom)}}
-    <div style="color: red;">{{errorMessage}}</div>
+</div> 
+        <div>{{accommodation.Title}}</div>
+        <div>{{accommodation.Adress}}</div>
+        <div>{{accommodation.Category.CategoryName}}</div>
+        <div>{{accommodation.Price }}</div>
 </div>
+
         <!-- Subscribe Start -->
         <div class="container-fluid subscribe py-5">
             <div class="container text-center py-5">

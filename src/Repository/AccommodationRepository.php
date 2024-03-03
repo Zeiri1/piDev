@@ -21,20 +21,33 @@ class AccommodationRepository extends ServiceEntityRepository
         parent::__construct($registry, Accommodation::class);
     }
 
-//    /**
-//     * @return Accommodation[] Returns an array of Accommodation objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Accommodation[] Returns an array of Accommodation objects
+    */
+   public function searchByTitle($value): array
+   {
+    return $this->createQueryBuilder('a')
+        ->where('a.Title LIKE :name' )
+        ->setParameter('name' , '%'.$value.'%') 
+        ->getQuery()  
+    ->getResult() ;
+   }
+
+   public function searchByMinMax($min,$max){
+    $em= $this->getEntityManager();
+    return $em->createQuery('SELECT a from App\Entity\Accommodation a where a.Price BETWEEN :min and :max ' )
+
+    ->setParameters(['min'=>$min ,'max'=>$max]) 
+    ->getResult() ;
+}
+
+public function searchByTitleAndMinMax($title, $min,$max){
+    $em= $this->getEntityManager();
+    return $em->createQuery('SELECT a from App\Entity\Accommodation a where a.Title LIKE :title and a.Price BETWEEN :min and :max ' )
+
+    ->setParameters(['title'=>'%'.$title.'%','min'=>$min ,'max'=>$max]) 
+    ->getResult() ;
+}
 
 //    public function findOneBySomeField($value): ?Accommodation
 //    {
