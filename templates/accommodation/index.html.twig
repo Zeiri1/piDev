@@ -61,13 +61,14 @@
         <!-- Navbar End -->
 
 <div style="margin-top:100px">
- <div style="display:flex">
+ <div style="display:flex; flex-wrap: wrap;">
     {% for a in Accommodations %}
     <div style="border: black solid 1px;
         border-radius: 13px;padding: 14px; 
         margin:10px; width:200px; 
         background: url('{% if a.Image is not null %} {{asset('images/'~a.Image)}} {% else %} {{asset('images/no-image.png')}} {% endif %}');
-        background-size: cover;">
+        background-size: cover;
+        min-width: 200px;">
         <div>{{a.Title}}</div>
         <div>{{a.Adress}}</div>
         <div>{{a.Category.CategoryName}}</div>

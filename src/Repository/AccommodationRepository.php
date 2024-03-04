@@ -49,13 +49,12 @@ public function searchByTitleAndMinMax($title, $min,$max){
     ->getResult() ;
 }
 
-//    public function findOneBySomeField($value): ?Accommodation
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+   public function findAllByCategory($value): array
+   {
+       return $this->createQueryBuilder('a')
+           ->andWhere('a.category = :val')
+           ->setParameter('val', $value)
+           ->getQuery()
+           ->getResult() ;
+   }
 }

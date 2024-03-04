@@ -61,23 +61,6 @@
         <!-- Navbar End -->
 
 <div style="margin-top:100px">
-<div class="search-bar">
-{{form_start(searchForm,{'attr':{'novalidate': 'novalidate'}} )}}
-    {{form_label(searchForm.title,"Title")}}
-    {{form_widget(searchForm.title)}}
-    {{form_errors(searchForm.title)}}
-
-    {{form_label(searchForm.min,"Min")}}
-    {{form_widget(searchForm.min)}}
-    {{form_errors(searchForm.min)}}
-
-    {{form_label(searchForm.max,"Max")}}
-    {{form_widget(searchForm.max)}}
-    {{form_errors(searchForm.max)}}
-
-    {{form_widget(searchForm.Search)}}
-{{form_end(searchForm)}}
-</div>
 <div class="categories" style="display:flex">
 <div>most searched categories :&nbsp;&nbsp;</div>
     {% for categ in allCategories %}
@@ -102,9 +85,6 @@
     </a>
     {% endfor %}
 </div> 
-<div style="position: relative;left: 48%;" class="navigation">
-    {{ knp_pagination_render(Accommodations) }}
-</div>
 </div>
 
         <!-- Subscribe Start -->

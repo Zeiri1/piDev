@@ -23,6 +23,7 @@ class AccommodationController extends AbstractController
         return $this->render('accommodation/index.html.twig', 
         ['Accommodations' => $allAccoms]
     );
+    
     }
     #[Route('/accommodation/add', name: 'Accommodation_add')]
     public function AddAccommodation(ManagerRegistry $doctrine, 
