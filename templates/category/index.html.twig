@@ -237,27 +237,67 @@
         </nav>
         <div class="main-panel">
 
- <div>
-    <table border="3">
-        <tr>
-            <td>CategoryName</td>
-            <td>Description</td>
-            <td>Statistics</td>
-            <td>edit</td>
-            <td>delete</td>
-        </tr>
-        {% for a in Categories %}
-        <tr>
-            <td>{{a.CategoryName}}</td>
-            <td>{{a.Description}}</td>
-            <td>{{a.Statistics}}</td>
-            <td><a href="{{ path('editCategory', {'id': a.id}) }}">edit</a></td>
-            <td><a href="{{ path('deleteCategory', {'id': a.id}) }}">delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    <a href ="{{path('Category_add')}}">Add</a>
-</div> 
+<style>
+  .category-table { /* Add a class for easier styling */
+    border-collapse: collapse; /* Remove space between cells */
+    width: 100%; /* Make the table full width */
+  }
+
+  .category-table th,
+  .category-table td {
+    padding: 10px; /* Add padding to cells */
+    border: 1px solid #ddd; /* Add borders to cells */
+    text-align: left; /* Align text to the left */
+  }
+
+  .category-table th {
+    background-color: #f2f2f2; /* Add a light gray background to headers */
+    font-weight: bold; /* Make headers bold */
+  }
+
+  .category-table a {
+    color: #007bff; /* Blue color for links */
+    text-decoration: none; /* Remove underline from links */
+  }
+
+  .category-table a:hover {
+    text-decoration: underline; /* Add underline on hover for links */
+  }
+
+  .add-button {
+    display: inline-block; /* Make the add button display inline */
+    margin-top: 10px; /* Add some margin to the top */
+    padding: 5px 10px;
+    background-color: #4CAF50; /* Green color for the button */
+    color: white; /* White text color */
+    border: none; /* Remove border from the button */
+    border-radius: 3px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+</style>
+
+<div>
+  <table class="category-table">
+    <tr>
+      <th>CategoryName</th>
+      <th>Description</th>
+      <th>Statistics</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    {% for a in Categories %}
+      <tr>
+        <td>{{ a.CategoryName }}</td>
+        <td>{{ a.Description }}</td>
+        <td>{{ a.Statistics }}</td>
+        <td><a href="{{ path('editCategory', {'id': a.id}) }}">Edit</a></td>
+        <td><a href="{{ path('deleteCategory', {'id': a.id}) }}">Delete</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ path('Category_add') }}" class="add-button">Add</a>
+</div>
+
 
           </div>
           <footer class="footer">

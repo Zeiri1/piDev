@@ -60,27 +60,88 @@
         </div>
         <!-- Navbar End -->
 
-<div style="margin-top:100px">
- <div style="display:flex; flex-wrap: wrap;">
-    {% for a in Accommodations %}
-    <div style="border: black solid 1px;
-        border-radius: 13px;padding: 14px; 
-        margin:10px; width:200px; 
-        background: url('{% if a.Image is not null %} {{asset('images/'~a.Image)}} {% else %} {{asset('images/no-image.png')}} {% endif %}');
-        background-size: cover;
-        min-width: 200px;">
-        <div>{{a.Title}}</div>
-        <div>{{a.Adress}}</div>
-        <div>{{a.Category.CategoryName}}</div>
-        <div>{{a.Price }}</div>
-        <div><a href="{{ path('editAccommodation', {'id': a.id}) }}">edit</a></div>
-        <div><a href="{{ path('deleteAccommodation', {'id': a.id}) }}">delete</a></div>
-
+<div style="margin-top: 100px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+        {% for a in Accommodations %}
+        <div class="accommodation-card">
+            <div class="image-container" style="background-image: url('{% if a.Image is not null %} {{asset('images/'~a.Image)}} {% else %} {{asset('images/no-image.png')}} {% endif %}');"></div>
+            <div class="info">
+                <div class="title">{{a.Title}}</div>
+                <div class="address">{{a.Adress}}</div>
+                <div class="category">{{a.Category.CategoryName}}</div>
+                <div class="price">{{a.Price}}</div>
+                <div class="actions">
+                    <a href="{{ path('editAccommodation', {'id': a.id}) }}">Edit</a>
+                    <a href="{{ path('deleteAccommodation', {'id': a.id}) }}">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div> 
-<a href ="{{path('Accommodation_add')}}">Add</a>
+    <a href="{{path('Accommodation_add')}}" class="add-button">Add</a>
 </div>
+
+<style>
+.accommodation-card {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 250px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.info {
+    padding: 10px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.address, .category, .price {
+    margin-bottom: 5px;
+}
+
+.actions {
+    margin-top: 10px;
+}
+
+.actions a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+.add-button {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    margin: 20px;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+</style>
 
         <!-- Subscribe Start -->
         <div class="container-fluid subscribe py-5">

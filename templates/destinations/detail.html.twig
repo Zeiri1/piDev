@@ -60,19 +60,50 @@
         </div>
         <!-- Navbar End -->
 
-<div style="margin-top:100px">
-    <div style="border: black solid 1px;
-        border-radius: 13px;padding: 14px; 
-        margin:10px; width:200px; 
-        background: url('{% if accommodation.Image is not null %} {{asset('images/'~accommodation.Image)}} {% else %} {{asset('images/no-image.png')}} {% endif %}');
-        background-size: cover;">
+<style>
+  .accommodation-page {
+    margin-top: 100px; /* Maintain existing margin */
+    display: flex; /* Arrange elements side-by-side */
+  }
 
-</div> 
-        <div>{{accommodation.Title}}</div>
-        <div>{{accommodation.Adress}}</div>
-        <div>{{accommodation.Category.CategoryName}}</div>
-        <div>{{accommodation.Price }}</div>
+  .accommodation-image {
+    flex: none; /* Fix image width */
+    width: 250px; /* Adjust image width */
+    background-size: cover; /* Ensure image fills the container */
+    border-radius: 13px; /* Match content area */
+    margin: 10px; /* Maintain margin */
+  }
+
+  .accommodation-details {
+    flex: 1; /* Allow content area to grow */
+    padding: 20px; /* Increase padding for better readability */
+    border-radius: 13px; /* Maintain border radius */
+    background-color: #f5f5f5; /* Light gray background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+
+  .accommodation-details h2 { /* Style title */
+    margin-top: 0; /* Remove top margin */
+    font-size: 20px; /* Increase title size */
+  }
+
+  .accommodation-details p { /* Consistent style for details */
+    margin-bottom: 5px; /* Add some spacing between details */
+    font-size: 16px; /* Adjust detail text size */
+  }
+</style>
+
+<div class="accommodation-page">
+  <div class="accommodation-image" style="background-image: url('{% if accommodation.Image is not null %} {{ asset('images/' ~ accommodation.Image) }} {% else %} {{ asset('images/no-image.png') }} {% endif %}');">
+  </div>
+  <div class="accommodation-details">
+    <h2>{{ accommodation.Title }}</h2>
+    <p>{{ accommodation.Adress }}</p>
+    <p>{{ accommodation.Category.CategoryName }}</p>
+    <p>{{ accommodation.Price }}</p>
+  </div>
 </div>
+
 
         <!-- Subscribe Start -->
         <div class="container-fluid subscribe py-5">

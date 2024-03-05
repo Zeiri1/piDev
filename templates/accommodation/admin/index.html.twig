@@ -236,17 +236,47 @@
         </nav>
         <div class="main-panel">
 
- <div style="display:flex">
-    {% for a in Accommodations %}
-    <div style="border: black solid 1px;border-radius: 13px;padding: 14px; margin:10px; width:200px">
-        <div>{{a.Title}}</div>
-        <div>{{a.Adress}}</div>
-        <div>{{a.Price }}</div>
-        <div><a href="{{ path('adminDeleteAccommodation', {'id': a.id}) }}">delete</a></div>
+<style>
+  .accommodation-list {
+    display: flex;
+    flex-wrap: wrap; /* Wrap items to fit the container */
+  }
 
+  .accommodation-item {
+    border: 1px solid black;
+    border-radius: 13px;
+    padding: 14px;
+    margin: 10px;
+    width: 195px;
+    background-color: #f5f5f5; /* Add a light gray background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+
+  .accommodation-item h3 {
+    margin-top: 0; /* Remove top margin from title */
+  }
+
+  .accommodation-item a {
+    color: #007bff; /* Blue color for link */
+    text-decoration: none; /* Remove underline from link */
+  }
+
+  .accommodation-item a:hover {
+    text-decoration: underline; /* Add underline on hover for link */
+  }
+</style>
+
+<div class="accommodation-list">
+  {% for a in Accommodations %}
+    <div class="accommodation-item">
+      <h3>{{ a.Title }}</h3>
+      <p>{{ a.Adress }}</p>
+      <p>{{ a.Price }}</p>
+      <p><a href="{{ path('adminDeleteAccommodation', {'id': a.id}) }}">Delete</a></p>
     </div>
-    {% endfor %}
-</div> 
+  {% endfor %}
+</div>
+
 
           </div>
           <footer class="footer">

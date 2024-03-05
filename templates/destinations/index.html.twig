@@ -78,33 +78,31 @@
     {{form_widget(searchForm.Search)}}
 {{form_end(searchForm)}}
 </div>
-<div class="categories" style="display:flex">
-<div>most searched categories :&nbsp;&nbsp;</div>
+<div class="categories" style="display: flex; align-items: center;">
+    <div style="margin-right: 10px;">Most searched categories:</div>
     {% for categ in allCategories %}
-        <a href="{{ path('destinationByCategory', {'id': categ.id}) }}"
-        style="border: solid 1px black;border-radius: 20px;margin-right: 10px;padding: 0px 4px;background: antiquewhite;">{{categ.CategoryName}}</a>
+        <a href="{{ path('destinationByCategory', {'id': categ.id}) }}" class="category-link">{{ categ.CategoryName }}</a>
     {% endfor %}
 </div>
- <div style="display:flex">
-    {% for a in Accommodations %}
-    <a  
-    href="{{ path('show_accommodation', {'id': a.id}) }}"
-    style="border: black solid 1px;
-        border-radius: 13px;padding: 14px; 
-        margin:10px; width:200px; 
-        background: url('{% if a.Image is not null %} {{asset('images/'~a.Image)}} {% else %} {{asset('images/no-image.png')}} {% endif %}');
-        background-size: cover;">
-        <div>{{a.Title}}</div>
-        <div>{{a.Adress}}</div>
-        <div>{{a.Category.CategoryName}}</div>
-        <div>{{a.Price }}</div>
 
-    </a>
+<div class="accommodations-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+    {% for a in Accommodations %}
+        <a href="{{ path('show_accommodation', {'id': a.id}) }}" class="accommodation-card">
+            <div class="image" style="background-image: url('{% if a.Image is not null %} {{ asset('images/'~a.Image) }} {% else %} {{ asset('images/no-image.png') }} {% endif %}')"></div>
+            <div class="info">
+                <div class="title">{{ a.Title }}</div>
+                <div class="address">{{ a.Adress }}</div>
+                <div class="category">{{ a.Category.CategoryName }}</div>
+                <div class="price">{{ a.Price }}</div>
+            </div>
+        </a>
     {% endfor %}
-</div> 
-<div style="position: relative;left: 48%;" class="navigation">
+</div>
+
+<div class="navigation" style="text-align: center; margin-top: 20px;">
     {{ knp_pagination_render(Accommodations) }}
 </div>
+
 </div>
 
         <!-- Subscribe Start -->
@@ -232,7 +230,95 @@
         <!-- Copyright End -->
          <!-- Back to Top -->
         <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+<style>
+  .search-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add spacing between elements */
+    margin: 10px; /* Add margin for better visual separation */
+    padding: 10px; /* Add padding for better visual separation */
+    border: 1px solid #ddd; /* Add a border to the search bar */
+    border-radius: 5px; /* Add rounded corners to the search bar */
+  }
 
+  .search-bar label {
+    font-weight: bold; /* Make labels bold for better readability */
+  }
+
+  .search-bar input[type="text"],
+  .search-bar input[type="number"] {
+    padding: 5px; /* Add padding to input fields */
+    border: 1px solid #ccc; /* Add a border to input fields */
+    border-radius: 3px; /* Add rounded corners to input fields */
+  }
+
+  .search-bar button[type="submit"] {
+    background-color: #4CAF50; /* Green color for submit button */
+    color: white; /* White text color for submit button */
+    padding: 5px 10px; /* Add padding to submit button */
+    border: none; /* Remove border from submit button */
+    border-radius: 3px; /* Add rounded corners to submit button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  .category-link {
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-right: 10px;
+    padding: 4px 8px;
+    background: antiquewhite;
+    text-decoration: none;
+    color: black;
+}
+
+.category-link:hover {
+    background: #ddd;
+}
+
+.accommodation-card {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 13px;
+    padding: 14px;
+    width: 200px;
+    background-size: cover;
+    text-decoration: none;
+    color: black;
+}
+
+.accommodation-card:hover {
+    background-color: #f0f0f0;
+}
+
+.accommodation-card .image {
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.accommodation-card .info {
+    padding: 0 10px;
+}
+
+.accommodation-card .title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.accommodation-card .address,
+.accommodation-card .category,
+.accommodation-card .price {
+    margin-bottom: 5px;
+}
+
+.navigation {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
+
+</style>
         
 
 {% endblock %}
