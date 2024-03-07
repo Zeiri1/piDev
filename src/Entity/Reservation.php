@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
@@ -14,8 +15,6 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $datereservation = null;
@@ -23,24 +22,13 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Offre $offre = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
-    private ?Client $client = null;
+    #[ORM\Column(nullable: true)]
+    #[Assert\NotBlank(message:'nombreplace required')]
+    private ?int $nombreplace = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): static
-    {
-        $this->date = $date;
-
-        return $this;
     }
 
     public function getDatereservation(): ?\DateTimeInterface
@@ -67,15 +55,16 @@ class Reservation
         return $this;
     }
 
-    public function getClient(): ?Client
+    public function getNombreplace(): ?int
     {
-        return $this->client;
+        return $this->nombreplace;
     }
 
-    public function setClient(?Client $client): static
+    public function setNombreplace(?int $nombreplace): static
     {
-        $this->client = $client;
+        $this->nombreplace = $nombreplace;
 
         return $this;
     }
+
 }

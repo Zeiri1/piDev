@@ -1,0 +1,16 @@
+{# templates/your_template.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Add Reservation</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form.datereservation) }}
+    {{ form_row(form.offre) }}
+    {{ form_row(form.client) }}
+
+    <button type="submit">Submit</button>
+    {{ form_end(form) }}
+{% endblock %}

@@ -27,8 +27,6 @@ class Client
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'client')]
     private Collection $reservations;
 
-    #[ORM\OneToMany(targetEntity: Vol::class, mappedBy: 'client')]
-    private Collection $vols;
 
     #[ORM\OneToMany(targetEntity: Reclamation::class, mappedBy: 'client')]
     private Collection $reclamations;
@@ -37,7 +35,6 @@ class Client
     {
         $this->offres = new ArrayCollection();
         $this->reservations = new ArrayCollection();
-        $this->vols = new ArrayCollection();
         $this->reclamations = new ArrayCollection();
     }
 
@@ -82,19 +79,6 @@ class Client
     {
         if (!$this->offres->contains($offre)) {
             $this->offres->add($offre);
-            $offre->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOffre(Offre $offre): static
-    {
-        if ($this->offres->removeElement($offre)) {
-            // set the owning side to null (unless already changed)
-            if ($offre->getClient() === $this) {
-                $offre->setClient(null);
-            }
         }
 
         return $this;
@@ -124,36 +108,6 @@ class Client
             // set the owning side to null (unless already changed)
             if ($reservation->getClient() === $this) {
                 $reservation->setClient(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Vol>
-     */
-    public function getVols(): Collection
-    {
-        return $this->vols;
-    }
-
-    public function addVol(Vol $vol): static
-    {
-        if (!$this->vols->contains($vol)) {
-            $this->vols->add($vol);
-            $vol->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVol(Vol $vol): static
-    {
-        if ($this->vols->removeElement($vol)) {
-            // set the owning side to null (unless already changed)
-            if ($vol->getClient() === $this) {
-                $vol->setClient(null);
             }
         }
 

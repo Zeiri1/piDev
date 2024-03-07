@@ -5,7 +5,10 @@ namespace App\Entity;
 use App\Repository\OffreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: OffreRepository::class)]
 class Offre
@@ -15,14 +18,20 @@ class Offre
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 1,
+        max: 50,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:'discription required')]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $startdate = null;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $duration = null;
@@ -32,6 +41,12 @@ class Offre
 
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'offre')]
     private Collection $reservations;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $startdate = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -67,17 +82,6 @@ class Offre
         return $this;
     }
 
-    public function getDatereservation(): ?string
-    {
-        return $this->startdate;
-    }
-
-    public function setDatereservation(?string $datereservation): static
-    {
-        $this->startdate = $datereservation;
-
-        return $this;
-    }
 
     public function getDuration(): ?string
     {
@@ -132,4 +136,34 @@ class Offre
 
         return $this;
     }
+
+    public function getStartdate(): ?\DateTimeInterface
+    {
+        return $this->startdate;
+    }
+
+    public function setStartdate(?\DateTimeInterface $startdate): static
+    {
+        $this->startdate = $startdate;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->title; // Retourne le nom de l'offre (ou toute autre propriété pertinente) en tant que chaîne de caractères
+    }
+
+    
 }
