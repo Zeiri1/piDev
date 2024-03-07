@@ -1,0 +1,104 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}
+    <title>DiscoverTN - Liste des Événements</title>
+{% endblock %}
+
+{% block body %}
+  
+
+    <div class="container">
+        <h1 class="my-4">Liste des Événements</h1>
+
+        <div class="card-deck">
+    {% for evenement in evenements %}
+        <div class="card {% if loop.index is odd %}odd-card{% else %}even-card{% endif %}">
+            <div class="card-header bg-dark text-light">
+                #{{ evenement.id }}
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Date de Départ:</strong> {{ evenement.dateDepart ? evenement.dateDepart|date('Y-m-d') : '' }}</p>
+                <p class="card-text"><strong>Date de Fin:</strong> {{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</p>
+                <p class="card-text"><strong>Heure:</strong> {{ evenement.heure ? evenement.heure|date('H:i:s') : '' }}</p>
+                <p class="card-text"><strong>Lieu:</strong> {{ evenement.lieu }}</p>
+                <p class="card-text"><strong>Type:</strong> {{ evenement.type }}</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" href="{{ path('app_evenement_show', {'id': evenement.id}) }}">
+                    <i class="fas fa-eye"></i> Voir
+                </a>
+                <a class="btn btn-warning" href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">
+                    <i class="fas fa-edit"></i> Éditer
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="card text-center">
+            <div class="card-body">
+                <p class="card-text">Aucun enregistrement trouvé</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+        <a class="btn btn-success mt-3" href="{{ path('app_evenement_new') }}">
+            <i class="fas fa-plus"></i> Créer un nouvel événement
+        </a>
+
+          <style>
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        .table-responsive {
+            margin-top: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .thead-dark th {
+            background-color: #343a40;
+            color: #fff;
+        }
+    .odd-row {
+            background-color: #f9f9f9;
+        }
+
+        .even-row {
+            background-color: #e0e0e0;
+        }
+      
+
+        .btn {
+            margin-right: 5px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn-create {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,123 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+
+   
+{% block body %}
+
+    
+
+    <div class="show-container">
+        <h1>Evenement</h1>
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>DateDepart</th>
+                <td>{{ evenement.dateDepart ? evenement.dateDepart|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure</th>
+                <td>{{ evenement.heure ? evenement.heure|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ evenement.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ evenement.type }}</td>
+            </tr>
+      
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_evenement_index') }}" class="back-link">Back to list</a>
+
+        <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="edit-link">Edit</a>
+
+        {{ include('evenement/_delete_form.html.twig') }}  
+   
+   
+
+    <style>
+        /* Styles spécifiques pour la page show */
+        .show-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: ##fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .show-container:hover {
+            background-color: #fff;
+        }
+
+        .show-container h1 {
+            color: #07bff0;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .table th {
+            background-color: #fff;
+            color: #13357B;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #ddd; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+        .table td {
+            padding: 12px;
+             border-bottom: 2px solid #ddd; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .back-link, .edit-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .back-link:hover, .edit-link:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-form {
+            margin-top: 20px;
+        }
+
+        /* Ajoutez d'autres styles spécifiques au besoin */
+    </style>
+
+
+   
+  
+     </div>
+{% endblock %}
+

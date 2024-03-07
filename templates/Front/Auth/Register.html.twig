@@ -1,0 +1,14 @@
+{% extends 'baseFront.html.twig' %}
+
+
+	{% block homepath %}
+
+		<li ><a href="{{ path("app_home") }}">Home</a></li>
+	{% endblock %}
+
+    {% block aboutpath %}
+		<li  class="active"><a href="{{ path("about") }}">About</a></li>
+	{% endblock  %}
+{% block body %}
+
+{% endblock %}
