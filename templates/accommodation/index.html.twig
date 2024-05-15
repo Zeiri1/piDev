@@ -67,7 +67,7 @@
             <div class="image-container" style="background-image: url('{% if a.Image is not null %} {{asset('images/'~a.Image)}} {% else %} {{asset('images/no-image.png')}} {% endif %}');"></div>
             <div class="info">
                 <div class="title">{{a.Title}}</div>
-                <div class="address">{{a.Adress}}</div>
+                <div class="address">{{a.address}}</div>
                 <div class="category">{{a.Category.CategoryName}}</div>
                 <div class="price">{{a.Price}}</div>
                 <div class="actions">

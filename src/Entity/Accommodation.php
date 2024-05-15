@@ -19,7 +19,7 @@ class Accommodation
     private ?string $Title = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Adress = null;
+    private ?string $address = null;
 
     #[ORM\Column]
     private ?float $Price = null;
@@ -66,14 +66,14 @@ class Accommodation
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getaddress(): ?string
     {
-        return $this->Adress;
+        return $this->address;
     }
 
-    public function setAdress(string $Adress): static
+    public function setaddress(string $address): static
     {
-        $this->Adress = $Adress;
+        $this->address = $address;
 
         return $this;
     }

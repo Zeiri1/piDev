@@ -270,7 +270,7 @@
   {% for a in Accommodations %}
     <div class="accommodation-item">
       <h3>{{ a.Title }}</h3>
-      <p>{{ a.Adress }}</p>
+      <p>{{ a.address }}</p>
       <p>{{ a.Price }}</p>
       <p><a href="{{ path('adminDeleteAccommodation', {'id': a.id}) }}">Delete</a></p>
     </div>

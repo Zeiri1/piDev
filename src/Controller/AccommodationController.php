@@ -44,7 +44,7 @@ class AccommodationController extends AbstractController
                     'allCategories'=>$allCategories
                 ]);
             }
-            if(empty($form->get('Adress')->getData())){
+            if(empty($form->get('address')->getData())){
                 $errorMessage = "Address is empty";
                 return $this->render('accommodation/form.html.twig',[
                     'formAccom'=>$form->createView(),

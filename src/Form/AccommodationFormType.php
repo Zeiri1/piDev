@@ -18,7 +18,7 @@ class AccommodationFormType extends AbstractType
     {
         $builder
             ->add('Title')
-            ->add('Adress')
+            ->add('address')
             ->add('Price')
             ->add('Type')
             ->add('Category',EntityType::class, [
